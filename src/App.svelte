@@ -1,6 +1,8 @@
 <script>
   // Easy build in animations
   import { fade, fly } from "svelte/transition";
+  import { randomStore } from "./store.js";
+
   // name is coming from "main.js" props > name = 'world'
   export let name;
 
@@ -44,6 +46,10 @@
     padding: 50px 0 50px 50px;
   }
 
+  .fourth {
+    padding: 50px 0 50px 50px;
+  }
+
   h1 {
     margin: 0;
     padding: 0;
@@ -83,7 +89,7 @@
       <span>{name ? name : ''}!</span>
     </h1>
     <p>the random number is</p>
-    <h3>{rando}</h3>
+    <h3>{rando ? rando : 0}</h3>
 
     <button on:click={setRando}>Randomize</button>
     <p>Your Score is {result ? result : 0}</p>
@@ -102,7 +108,9 @@
   </div>
 </div>
 
+<br />
 <hr />
+<br />
 
 <div class="second">
   <h1>
@@ -130,7 +138,9 @@
   </div>
 </div>
 
+<br />
 <hr />
+<br />
 
 <div class="third">
   <h1>
@@ -147,4 +157,41 @@
   {:catch error}
     <h4>You got an error {error.message}</h4>
   {/await}
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="fourth">
+  <h1>
+    this is the
+    <strong>FOURTH</strong>
+    example
+    <strong>global store</strong>
+  </h1>
+
+  <div class="wrap">
+    <h2>
+      first:
+      <span class="first_name">{$randomStore.first}</span>
+    </h2>
+    <h2>
+      <!-- by adding "$" in front of "randomStore" it now handles the subscribing and discarding of the store -->
+      last:
+      <span>{$randomStore.last}</span>
+    </h2>
+    <h2>
+      age:
+      <span class="age">{$randomStore.age}</span>
+    </h2>
+
+    <button
+      on:click={() => randomStore.update(store => ({
+          ...store,
+          age: Math.round(Math.random() * 100)
+        }))}>
+      Random Age
+    </button>
+  </div>
 </div>
