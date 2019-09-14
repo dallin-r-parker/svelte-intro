@@ -1,14 +1,20 @@
 <script>
   import { fade, fly } from "svelte/transition";
 
-  export let name;
+  let name;
 
-  let rando = "Click Randomize";
+  // let rando = "Click Randomize";
+  let randos = [];
 
-  $: result = Math.round(rando * 100);
+  // $: result = Math.round(rando * 100);
 
   function setRando() {
     rando = Math.random() * Math.random();
+    randos = [...randos, rando];
+  }
+
+  function clear() {
+    name = "";
   }
 </script>
 
@@ -28,6 +34,11 @@
 </style>
 
 <div>
+  <h1>Hello {name ? name : ''}!</h1>
+  <input bind:value={name} on:blur={clear} />
+</div>
+
+<!-- <div>
   <h1>Hello {name}!</h1>
   <p>the random number is</p>
   <h3>{rando}</h3>
@@ -46,4 +57,4 @@
       Loser 💩💩💩
     </p>
   {/if}
-</div>
+</div> -->
