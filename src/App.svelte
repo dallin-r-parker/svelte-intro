@@ -2,7 +2,13 @@
   // Easy build in animations
   import { fade, fly } from "svelte/transition";
   import { randomStore } from "./store.js";
+  import Child from "./Child.svelte";
 
+  let data = {
+    userId: 123,
+    name: "Dallin Parker",
+    email: "dallin.parker@testing.com"
+  };
   // name is coming from "main.js" props > name = 'world'
   export let name;
 
@@ -194,4 +200,19 @@
       Random Age
     </button>
   </div>
+</div>
+
+<br />
+<hr />
+<br />
+
+<div class="fifth">
+  <h1>
+    this is the
+    <strong>FIFTH</strong>
+    example
+    <strong>child component passing props</strong>
+  </h1>
+
+  <Child {...data} />
 </div>
