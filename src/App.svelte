@@ -1,8 +1,8 @@
 <script>
   // Easy build in animations
   import { fade, fly } from "svelte/transition";
-
-  let name;
+  // name is coming from "main.js" props > name = 'world'
+  export let name;
 
   let rando;
   let randos = [];
