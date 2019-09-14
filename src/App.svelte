@@ -19,6 +19,14 @@
   function clear() {
     name = "";
   }
+
+  // showing how to handling ASYNC
+  function delay(ms) {
+    console.log(`working: `);
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  let randoDelay = delay(500).then(v => Math.random());
 </script>
 
 <style>
@@ -65,7 +73,10 @@
       This is the
       <strong>FIRST</strong>
       example
+      <strong>binding</strong>
     </h1>
+
+    <br />
 
     <h1>
       Hello
@@ -98,7 +109,9 @@
     This is the
     <strong>SECOND</strong>
     example
+    <strong>loops</strong>
   </h1>
+  <br />
 
   <h1>
     Hello
@@ -115,4 +128,23 @@
       {/each}
     </ul>
   </div>
+</div>
+
+<hr />
+
+<div class="third">
+  <h1>
+    this is the
+    <strong>THIRD</strong>
+    example
+    <strong>async/await</strong>
+  </h1>
+
+  {#await randoDelay}
+    <h2>{'...loading'}</h2>
+  {:then val}
+    <h2>Result {val}</h2>
+  {:catch error}
+    <h4>You got an error {error.message}</h4>
+  {/await}
 </div>
