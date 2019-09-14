@@ -3,19 +3,22 @@
 
   let name;
 
-  // let rando = "Click Randomize";
+  let rando;
   let randos = [];
 
   // $: result = Math.round(rando * 100);
 
   function setRando() {
     rando = Math.random() * Math.random();
+    console.log(`rando: `, rando);
     randos = [...randos, rando];
   }
 
   function clear() {
     name = "";
   }
+
+  console.log(`randos: `, randos);
 </script>
 
 <style>
@@ -36,6 +39,15 @@
 <div>
   <h1>Hello {name ? name : ''}!</h1>
   <input bind:value={name} on:blur={clear} />
+  <button on:click={setRando}>PUSH</button>
+
+  <div>
+    <ul>
+      {#each randos as val, idx}
+        <li>{Math.round(val * 100)}</li>
+      {/each}
+    </ul>
+  </div>
 </div>
 
 <!-- <div>
